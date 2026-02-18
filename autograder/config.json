@@ -1,0 +1,107 @@
+{
+  "autograder_config": {
+    "version": "1.0",
+    "java_version": "11",
+    "python_version": "3.10",
+    "timeout_seconds": 300,
+    "max_score": 100,
+    "min_passing_score": 40,
+    "test_suites": [
+      {
+        "name": "Compilation",
+        "visible": true,
+        "weight": 0.05,
+        "timeout": 60
+      },
+      {
+        "name": "RPC Basic",
+        "visible": true,
+        "weight": 0.20,
+        "timeout": 30
+      },
+      {
+        "name": "Protocol Structure",
+        "visible": true,
+        "weight": 0.20,
+        "timeout": 30
+      },
+      {
+        "name": "Concurrency",
+        "visible": false,
+        "weight": 0.10,
+        "timeout": 30
+      },
+      {
+        "name": "Parallel Execution",
+        "visible": false,
+        "weight": 0.20,
+        "timeout": 60
+      },
+      {
+        "name": "Failure Handling",
+        "visible": false,
+        "weight": 0.15,
+        "timeout": 60
+      },
+      {
+        "name": "Advanced Protocol",
+        "visible": false,
+        "weight": 0.10,
+        "timeout": 30
+      }
+    ],
+    "forbidden_frameworks": [
+      "grpc",
+      "akka",
+      "netty",
+      "rmi",
+      "jws",
+      "soap",
+      "corba",
+      "apache-camel"
+    ],
+    "required_fields": [
+      "magic",
+      "version",
+      "messageType",
+      "studentId",
+      "timestamp",
+      "payload"
+    ],
+    "protocol_constants": {
+      "magic": "CSM218",
+      "version": 1,
+      "token_prefix": "CSM218_TOKEN_"
+    },
+    "task_types": [
+      "MATRIX_MULTIPLY",
+      "BLOCK_TRANSPOSE"
+    ],
+    "message_types": [
+      "CONNECT",
+      "REGISTER_WORKER",
+      "REGISTER_CAPABILITIES",
+      "RPC_REQUEST",
+      "RPC_RESPONSE",
+      "TASK_COMPLETE",
+      "TASK_ERROR",
+      "HEARTBEAT",
+      "WORKER_ACK"
+    ],
+    "performance_baseline": {
+      "single_task_min_ms": 400,
+      "single_task_max_ms": 600,
+      "four_tasks_parallel_min_ms": 450,
+      "four_tasks_parallel_max_ms": 750,
+      "four_tasks_sequential_min_ms": 1600,
+      "four_tasks_sequential_max_ms": 2400
+    },
+    "environment_variables": [
+      "STUDENT_ID",
+      "MASTER_PORT",
+      "WORKER_ID",
+      "MASTER_HOST",
+      "CSM218_PORT_BASE"
+    ]
+  }
+}

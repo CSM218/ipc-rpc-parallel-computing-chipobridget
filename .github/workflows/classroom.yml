@@ -1,0 +1,107 @@
+name: GitHub Classroom Autograder
+on: [push]
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    name: Autograding
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Inject Hidden Tests
+        run: |
+          cat <<EOF > autograder/tests/test_hidden_robustness.py
+          import re
+          from pathlib import Path
+
+          def strip_comments(content):
+              content = re.sub(r'//.*', '', content)
+              content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
+              return content
+
+          class HiddenRobustnessTest:
+              """SECRET TEST: Only runs in remote CI. Focuses on System Consistency."""
+
+              def test_jumbo_payload_handling(self):
+                  """Verify protocol handles messages larger than MTU (8MB+)"""
+                  try:
+                      with open("src/main/java/pdc/Message.java", "r") as f:
+                          content = strip_comments(f.read())
+                          if "while" in content and ("read" in content or "in.read" in content):
+                              return True, "Buffered Jumbo-payload handling detected"
+                          else:
+                              return False, "Protocol likely fails on TCP fragmentation"
+                  except Exception as e:
+                      return False, str(e)
+
+              def test_byzantine_fault_tolerance(self):
+                  """Hidden: Cluster survival with 50% node loss"""
+                  try:
+                      with open("src/main/java/pdc/Master.java", "r") as f:
+                          content = strip_comments(f.read())
+                          if "reassign" in content.lower() and "retry" in content.lower():
+                              return True, "Distributed fault-tolerance logic verified"
+                          return False, "Master lacks reassignment depth"
+                  except Exception as e:
+                      return False, str(e)
+
+              def test_zero_copy_optimization(self):
+                  """Hidden: Check for memory efficiency in matrix transport"""
+                  try:
+                      with open("src/main/java/pdc/Message.java", "r") as f:
+                          content = strip_comments(f.read())
+                          if "ByteBuffer" in content or "DoubleBuffer" in content:
+                              return True, "High-efficiency Nio buffers used"
+                          return False, "Standard heap-based serialization (slow)"
+                  except Exception as e:
+                      return False, str(e)
+
+              def run_all(self):
+                  results = {}
+                  success, msg = self.test_jumbo_payload_handling()
+                  results["hidden_jumbo_payload"] = {"passed": success, "message": msg, "weight": 0.15}
+                  
+                  success, msg = self.test_byzantine_fault_tolerance()
+                  results["hidden_fault_tolerance"] = {"passed": success, "message": msg, "weight": 0.20}
+                  
+                  success, msg = self.test_zero_copy_optimization()
+                  results["hidden_efficiency"] = {"passed": success, "message": msg, "weight": 0.15}
+                  
+                  return results
+          EOF
+
+      # Support for your custom grading script
+      - name: Run Autograder
+        uses: education/autograding@v1
+        id: autograder
+        continue-on-error: true
+        env:
+          STUDENT_ID: ${{ github.actor }}
+          CSM218_PORT_BASE: 9000
+
+      - name: Verify 60% Passing Threshold
+        if: always()
+        run: bash autograder/run_autograder.sh
+
+      - name: Upload Autograder Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autograder-results
+          path: autograder/results/

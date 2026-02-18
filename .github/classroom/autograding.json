@@ -1,0 +1,154 @@
+{
+  "tests": [
+    {
+      "name": "01 Project Structural Integrity [IPC-1]",
+      "setup": "chmod +x ./gradlew",
+      "run": "bash autograder/run_autograder.sh --suite RPC --type static",
+      "input": "",
+      "output": "[CLASSROOM_TAG] COMPILATION PASSED",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "02 TCP Socket Connector [IPC-2]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite RPC --type static",
+      "input": "",
+      "output": "[CLASSROOM_TAG] SOCKET_IPC PASSED",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 5
+    },
+    {
+      "name": "03 Protocol Schema Validation [IPC-3]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite RPC --type static",
+      "input": "",
+      "output": "[CLASSROOM_TAG] PROTOCOL_SCHEMA PASSED",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 2
+    },
+    {
+      "name": "04 RPC Abstraction Layer [RPC-1]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite RPC --type static",
+      "input": "",
+      "output": "[CLASSROOM_TAG] RPC_ABSTRACTION PASSED",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 5
+    },
+    {
+      "name": "05 Message Frame & Wire Format [RPC-2]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite Protocol --type static",
+      "input": "",
+      "output": "[CLASSROOM_TAG] MESSAGE_FORMAT PASSED",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 2
+    },
+    {
+      "name": "06 Identity & Env Mapping [RPC-3]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite Protocol --type static",
+      "input": "",
+      "output": "[CLASSROOM_TAG] ENVIRONMENT_VARIABLES PASSED",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 2
+    },
+    {
+      "name": "07 Core Threading Support [CONC-1]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite Concurrency --type static",
+      "input": "",
+      "output": "[CLASSROOM_TAG] THREAD_SUPPORT PASSED",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 5
+    },
+    {
+      "name": "08 Concurrent Collection Usage [CONC-2]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite Concurrency --type static",
+      "input": "",
+      "output": "[CLASSROOM_TAG] CONCURRENT_COLLECTIONS PASSED",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 5
+    },
+    {
+      "name": "09 Parallel Matrix Multiply Timing [PARA-1]",
+      "setup": "chmod +x autograder/run_autograder.sh",
+      "run": "bash autograder/run_autograder.sh --suite Parallel --type dynamic",
+      "input": "",
+      "output": "[CLASSROOM_TAG] PARALLEL_MATRIX_MULTIPLY PASSED",
+      "comparison": "included",
+      "timeout": 20,
+      "points": 10
+    },
+    {
+      "name": "10 Fault Tolerance & Recovery [FAIL-1]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite Failure --type dynamic",
+      "input": "",
+      "output": "[CLASSROOM_TAG] RECOVERY_MECHANISM PASSED",
+      "comparison": "included",
+      "timeout": 20,
+      "points": 5
+    },
+    {
+      "name": "11 Framework Restriction Compliance [COORD-1]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite Protocol --type static",
+      "input": "",
+      "output": "[CLASSROOM_TAG] NO_EXTERNAL_FRAMEWORKS PASSED",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 2
+    },
+    {
+      "name": "12 Advanced Coordination Handshake [COORD-2]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite Advanced --type dynamic",
+      "input": "",
+      "output": "[CLASSROOM_TAG] ADVANCED_HANDSHAKE PASSED",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 3
+    },
+    {
+      "name": "13 Final Consistency Verification [SC-1]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite SystemConsistency",
+      "input": "",
+      "output": "[CLASSROOM_TAG] HIDDEN_JUMBO_PAYLOAD PASSED",
+      "comparison": "included",
+      "timeout": 20,
+      "points": 15
+    },
+    {
+      "name": "14 Cluster Scalability Analysis [SC-2]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite SystemConsistency",
+      "input": "",
+      "output": "[CLASSROOM_TAG] HIDDEN_FAULT_TOLERANCE PASSED",
+      "comparison": "included",
+      "timeout": 20,
+      "points": 20
+    },
+    {
+      "name": "15 Resource Optimization Check [SC-3]",
+      "setup": "",
+      "run": "bash autograder/run_autograder.sh --suite SystemConsistency",
+      "input": "",
+      "output": "[CLASSROOM_TAG] HIDDEN_EFFICIENCY PASSED",
+      "comparison": "included",
+      "timeout": 20,
+      "points": 15
+    }
+  ]
+}
